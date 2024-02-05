@@ -11,6 +11,15 @@
 # Note: This is only used by command line
 ###############################################################################
 #*.cs     diff=csharp
+*.csharp linguist-detectable=true
+
+*.css linguist-detectable=false
+
+*.js linguist-detectable=false
+
+*.html linguist-detectable=false
+
+*.scss linguist-detectable=false
 
 ###############################################################################
 # Set the merge driver for project and solution files
