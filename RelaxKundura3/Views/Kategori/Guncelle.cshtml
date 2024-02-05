@@ -1,0 +1,30 @@
+﻿@using RelaxKundura3.Dtos
+
+@model CreateOrEditKategoriDto
+
+@{
+    Layout = "~/Views/Shared/LayoutStaticAdmin.cshtml";
+}
+
+<div class="card">
+    <div class="card-header">
+        Kategori güncelleme sayfası
+    </div>
+    <div class="card-body">
+        @using (Html.BeginForm("Guncelle", "Kategori", FormMethod.Post))
+        {
+            @Html.HiddenFor(x => x.KategoriId)
+
+            <div class="my-3">
+                <label class="form-label" for="Ad">Ad</label>
+
+                @Html.TextBoxFor(x => x.KategoriAd, "", new { @class = "form-control", placeholder = "Kategori adını giriniz" })
+                <span asp-validation-for="KategoriAd" class="text-danger"></span>
+            </div>
+
+            <button type="submit" class="btn btn-success my-3">
+                Güncelle
+            </button>
+        }
+    </div>
+</div>

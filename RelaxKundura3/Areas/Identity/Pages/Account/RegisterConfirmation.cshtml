@@ -1,0 +1,38 @@
+﻿@page
+@model RegisterConfirmationModel
+@{
+    ViewData["Title"] = "Register confirmation";
+}
+
+
+<section class="banner-area organic-breadcrumb">
+	<div class="container">
+		<div class="breadcrumb-banner d-flex flex-wrap align-items-center justify-content-end">
+			<div class="col-first">
+				<h1>Email Onayı</h1>
+				<nav class="d-flex align-items-center">
+				</nav>
+			</div>
+		</div>
+	</div>
+</section>
+@{
+    if (@Model.DisplayConfirmAccountLink)
+    {
+		<br />
+		<br />
+		<br />
+		<br />
+		<br />
+<p>
+    Email Adresinizi Doğrulamak İstiyorsanız: <a id="confirm-link" href="@Model.EmailConfirmationUrl">Buraya Tıklayarak Email Adresinizi Doğrulayıp Hesabı Etkinleştirebilirsiniz</a>
+</p>
+    }
+    else
+    {
+<p>
+        Lütfen Email Adresnizi Kontrol Ediniz
+</p>
+    }
+}
+

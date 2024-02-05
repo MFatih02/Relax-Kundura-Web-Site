@@ -1,0 +1,193 @@
+﻿@{
+    
+    ViewData["Title"] = "Admin Panel";
+}
+
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat:400,700&display=swap">
+
+<style>
+    body {
+        font-family: 'Montserrat', sans-serif;
+        background-color: #f8f9fa;
+    }
+
+    .container {
+        margin-top: 50px;
+    }
+
+    .card-deck {
+        margin-top: 20px;
+    }
+
+    .card {
+        border: none;
+        border-radius: 10px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    .card-body {
+        text-align: center;
+    }
+
+    .card-title {
+        font-size: 20px;
+        font-weight: 700;
+    }
+
+    .card-text {
+        font-size: 24px;
+        font-weight: 700;
+    }
+
+    .chart-container {
+        margin-top: 50px;
+    }
+</style>
+
+<div class="container">
+    <h2 class="text-center">İstatistikler</h2>
+
+    <div class="card-deck mt-4">
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title"><i class="fas fa-cube"></i> Sisteme Kayıtlı Ürün Sayısı</h5>
+                <p class="card-text">@ViewBag.UrunSayisi</p>
+            </div>
+        </div>
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title"><i class="fas fa-list"></i> Sisteme Kayıtlı Kategori Sayısı</h5>
+                <p class="card-text">@ViewBag.KategoriSayisi</p>
+            </div>
+        </div>
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title"><i class="fas fa-users"></i> Sisteme Kayıtlı Kullanıcı Sayısı</h5>
+                <p class="card-text">@ViewBag.UserSayisi</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="row chart-container">
+        <div class="col-md-6">
+            <div id="cinsiyetChart"></div>
+        </div>
+        <div class="col-md-6">
+            <div id="kategoriChart"></div>
+        </div>
+    </div>
+</div>
+
+
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+    <script>
+        google.charts.load('current', { 'packages': ['corechart'] });
+        google.charts.setOnLoadCallback(drawCharts);
+
+        function drawCharts() {
+            drawCinsiyetChart();
+            drawKategoriChart();
+        }
+
+        function drawCinsiyetChart() {
+            var data = google.visualization.arrayToDataTable([
+                ['Cinsiyet', 'Sayı'],
+                ['Erkek', @ViewBag.ErkekUrunSayisi],
+                ['Kadın', @ViewBag.KadinUrunSayisi]
+            ]);
+
+            var options = {
+                title: 'Ürün Cinsiyet Dağılımı',
+                pieHole: 0.2,
+                slices: {
+                    0: { color: '#3498db' }, // Mavi tonu
+                    1: { color: '#e74c3c' }, // Kırmızı tonu
+                },
+                legend: {
+                    position: 'bottom',
+                    textStyle: {
+                        color: '#555',
+                        fontSize: 14
+                    }
+                },
+                titleTextStyle: {
+                    color: '#555',
+                    fontSize: 20,
+                    bold: true
+                },
+                backgroundColor: '#ecf0f1', // Grafik arkaplan rengi
+                chartArea: {
+                    left: 0,
+                    top: 10,
+                    width: '100%',
+                    height: '80%'
+                },
+                animation: {
+                    startup: true,
+                    duration: 1000,
+                    easing: 'out',
+                },
+            };
+
+            var chart = new google.visualization.PieChart(document.getElementById('cinsiyetChart'));
+            chart.draw(data, options);
+        }
+
+
+        function drawKategoriChart() {
+            var data = google.visualization.arrayToDataTable([
+                ['Kategori', 'Sayı'],
+        @foreach (var item in ViewBag.KategoriUrunSayilari)
+        {
+            @:['@Html.Raw(item.Key)', @item.Value],
+        }
+                        ]);
+
+            var options = {
+                title: 'Kategoriye Göre Ürün Dağılımı',
+                pieHole: 0.2,
+                slices: {
+                    0: { color: '#3498db' }, // Mavi tonu
+                    1: { color: '#e74c3c' }, // Kırmızı tonu
+                    2: { color: '#2ecc71' }, // Yeşil tonu
+                    3: { color: '#e67e22' }, // Turuncu tonu
+                    4: { color: '#8e44ad' }, // Mor tonu
+                    5: { color: '#f39c12' }, // Sarı tonu
+                    // ... Daha fazla kategori ekleyebilirsiniz.
+                },
+                legend: {
+                    position: 'bottom',
+                    textStyle: {
+                        color: '#555',
+                        fontSize: 14
+                    }
+                },
+                titleTextStyle: {
+                    color: '#555',
+                    fontSize: 20,
+                    bold: true
+                },
+                backgroundColor: '#ecf0f1', // Grafik arkaplan rengi
+                chartArea: {
+                    left: 0,
+                    top: 10,
+                    width: '100%',
+                    height: '80%'
+                },
+                animation: {
+                    startup: true,
+                    duration: 1000,
+                    easing: 'out',
+                },
+            };
+
+            var chart = new google.visualization.PieChart(document.getElementById('kategoriChart'));
+            chart.draw(data, options);
+        }
+    </script>
+

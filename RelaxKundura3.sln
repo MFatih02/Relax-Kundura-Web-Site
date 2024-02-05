@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.8.34316.72
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RelaxKundura3", "RelaxKundura3\RelaxKundura3.csproj", "{DB412D36-796A-4EE0-AAC9-185C01B1CF4C}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{DB412D36-796A-4EE0-AAC9-185C01B1CF4C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DB412D36-796A-4EE0-AAC9-185C01B1CF4C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DB412D36-796A-4EE0-AAC9-185C01B1CF4C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DB412D36-796A-4EE0-AAC9-185C01B1CF4C}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {50555BF9-49BA-4A25-8B43-D3AA7A025D68}
+	EndGlobalSection
+EndGlobal

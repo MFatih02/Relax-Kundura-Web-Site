@@ -1,0 +1,59 @@
+﻿@using RelaxKundura3.Dtos
+
+@model UrunEkleGuncelleView
+@{
+    Layout = "~/Views/Shared/LayoutStaticAdmin.cshtml";
+}
+
+<div class="card">
+    <div class="card-header">
+        Ürün ekleme sayfası
+    </div>
+    <div class="card-body">
+
+        @using (Html.BeginForm("Ekle", "Urun", FormMethod.Post, new { enctype = "multipart/form-data" }))
+        {
+            <div class="my-3">
+                <label class="form-label">Ad</label>
+                @Html.TextBoxFor(x => x.Urun.UrunAd, "", new { @class = "form-control", placeholder = "Ürün adını giriniz" })
+                @Html.ValidationMessageFor(x => x.Urun.UrunAd, "", new { @class = "text-danger" })
+
+            </div>
+
+            <div class="my-3">
+                <label class="form-label">Fiyat</label>
+                @Html.TextBoxFor(x => x.Urun.UrunFiyat, "", new { @class = "form-control", placeholder = "Ürün fiyatını giriniz" })
+                @Html.ValidationMessageFor(x => x.Urun.UrunFiyat)
+            </div>
+
+            <div class="my-3">
+                <label class="form-label">Ürün Stok</label>
+                @Html.TextBoxFor(x => x.Urun.UrunStokDurumu, "", new { @class = "form-control", placeholder = "Ürün stok durumunu giriniz" })
+                @Html.ValidationMessageFor(x => x.Urun.UrunStokDurumu)
+            </div>
+
+            <div class="my-3">
+                <label class="form-label">Ürün Cinsiyeti</label>
+                @Html.CinsiyetDropListFor("Urun.UrunCinsiyet", new { @class = "form-control", placeholder = "Cinsiyet seçiniz" })
+                @Html.ValidationMessageFor(x => x.Urun.UrunCinsiyet)
+            </div>
+
+            <div class="my-3">
+                <label class="form-label">Kategori</label>
+                @Html.DropDownListFor(x => x.Urun.UrunKategoriId, new SelectList(Model.Kategoriler, "KategoriId", "KategoriAd"), new { @class = "form-control" })
+                @Html.ValidationMessageFor(x => x.Urun.UrunKategoriId)
+            </div>
+
+            <div class="my-3">
+                <label class="form-label">Resim Yükle</label>
+                <input type="file" name="Urun.UrunImageUrl" class="form-control" accept="image/*" />
+                @Html.ValidationMessageFor(x => x.Urun.UrunImageUrl)
+            </div>
+
+
+            <button type="submit" class="btn btn-success my-3">
+                Kaydet
+            </button>
+        }
+    </div>
+</div>
